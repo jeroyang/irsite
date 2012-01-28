@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}Project #1{% endblock %}</title>
+
+		<!--iPhone specific-->
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+		<link href="images/icon.png" rel="apple-touch-icon" /> 
+
+		<!--Baseline CSS files-->
+		<link type="text/css" rel="stylesheet" media="screen" href="css/uncompressed/baseline.reset.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="css/uncompressed/baseline.base.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="css/uncompressed/baseline.type.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="css/uncompressed/baseline.table.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="css/uncompressed/baseline.form.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="css/uncompressed/baseline.grid.css">
+		<link type="text/css" rel="stylesheet" media="only screen and (max-device-width: 480px)" href="css/iphone/baseline.iphone.css">
+
+		<!--<link type="text/css" rel="stylesheet" media="screen" href="css/compressed/baseline.compress.css">-->
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+ 		<script type="text/javascript" src="scripts/html5.js"></script>
+		<style>
+			#page					{ margin: 0 auto 36px auto; }
+			.layout-grid			{ background-image: url(images/baseline+column.png); background-repeat: repeat; background-position: 0 1px; border-bottom: solid 1px #CEECF5; }
+			#branding a				{ border: none; }
+			.grid-example			{ background: rgba(187, 204, 221, 0.3); color: #069; }
+			.grid-example.unitx1, .grid-example.unitx2,
+			.grid-example.unitx3, .grid-example.unitx4,
+			.grid-example.unitx5, .grid-example.unitx6,
+			.grid-example.unitx7	{ margin-bottom: 18px; }
+			@media only screen and (max-device-width:480px) {
+				.layout-grid		{ background-image: url(images/baseline.png); }
+				.grid-example		{ background: rgba(187, 204, 221, 0.6); }
+			.selected {border: 1px red; }
+			}
+			.highlight {background-color: yellow;}
+            .note {
+               position:relative;
+               color:#fff;
+               background:#97C02F;
+               overflow:hidden;
+            }
+            
+            .note:before {
+               content:"";
+               position:absolute;
+               top:0;
+               right:0;
+               border-width:0 16px 16px 0;
+               border-style:solid;
+               border-color:#fff #fff #658E15 #658E15;
+               background:#658E15;
+               -webkit-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+               -moz-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+               box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+               display:block; width:0; /* Firefox 3.0 damage limitation */
+            }
+		</style>
+	</head>
+
+	<body class="page-grid">
+		<div id="page">
+			{% block content %}
+				{% endblock content %}
+			</div>
+			<footer class="full">
+				{% block footer %}
+				<hr>
+				<p><small>Project #1 for the Biomedical Information Retrieval Course. Chia-Jung, Yang. 2012</small></p>
+				{% endblock footer %}
+			</footer>
+            <script>
+			{% block jquery %}
+            $("span").hover(
+                function(){
+                    var theClass = $(this).attr("class");
+                    if (theClass.match(/^word_/)) {
+                        $("span."+theClass).addClass("highlight");
+                    }
+                },
+                function(){    
+                    $("span").removeClass("highlight");
+                });
+			{% endblock jquery %}
+            </script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Project #1{% endblock %}
+
+{% block content %}
+<header id="branding">
+	<h1>Project #1</h1>
+</header>
+<div class="full layout-grid">
+	<header class="column width4">
+		<h1>Full-text Comparator</h1>
+		<hr>
+	</header>
+	<section class="width4">
+		<h2>Identical words in both documents:</h2>
+		<div class="column width4 grid-example">
+			<p>{{common_word_list_html}}</p>
+		</div>
+	</section>
+	<section class="width4">
+		<h2>Results of comparison</h2>
+		<div class="column width2 first grid-example note">
+			<h3>{{xml[0].title}}</h3>
+			<p>{{xml[0].authors}}</p>
+			<p>{{xml[0].journal}}, {{xml[0].year}}</p>
+			<h4>Abstract</h4>
+			<p>{{document_list_html()[0]}}</p>
+			<h4>Statistics</h4>
+			<p>
+				{{statistics_list_html()[0]}}
+			</p>
+			<br/>
+		</div>
+		<div class="column width2 grid-example note">
+			<h3>{{xml[1].title}}</h3>
+			<p>{{xml[1].authors}}</p>
+			<p>{{xml[1].journal}}, {{xml[1].year}}</p>
+			<h4>Abstract</h4>
+			<p>{{document_list_html()[1]}}</p>
+			<h4>Statistics</h4>
+			<p>
+				{{statistics_list_html()[1]}}
+			</p>
+			<br/>
+		</div>
+	</section>
+</div>
+{% endblock content %}
