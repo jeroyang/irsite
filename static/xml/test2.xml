@@ -1,0 +1,103 @@
+<PubmedArticle>
+    <MedlineCitation Status="Publisher" Owner="NLM">
+        <PMID Version="1">21979996</PMID>
+        <DateCreated>
+            <Year>2011</Year>
+            <Month>10</Month>
+            <Day>7</Day>
+        </DateCreated>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1552-5783</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <PubDate>
+                        <Year>2011</Year>
+                        <Month>Oct</Month>
+                        <Day>6</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Investigative ophthalmology &amp; visual science</Title>
+            </Journal>
+            <ArticleTitle>Autofluorescence of the cells in human subretinal fluid.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn/>
+            </Pagination>
+            <Abstract>
+                <AbstractText>PurposeTo study the origin of autofluorescence in subretinal space, we investigated autofluorescence properties of the cells in surgically collected subretinal fluid.MethodsSubretinal fluid was surgically collected from four eyes of patients with rhegmatogenous retinal detachment (3 eyes) and Coats' disease (one eye). After cytocentrifuge preparation of the cells in the fluid and immunofluorescence staining, cytological examination was conducted using confocal scanning laser microscopy. To elucidate autofluorescence of the cells, fluorescence spectra were measured with fluorescence spectroscopy to obtain different excitation laser light 'emission fingerprints'.ResultsThe cells from the subretinal fluid were classified into three types: CD68-negative cells containing numerous pigment granules, CD68-positive cells containing few pigments, and CD68-negative cells with no pigment granules. Autofluorescence was observed in the inclusions of the cells classified into the former two types. When the cells were excited by a 458 nm or 488 nm laser light, emission spectra in autofluorescence showed little difference between CD68-positive and CD68-negative cells. Peak analysis confirmed that the two types of cells showed the same emission peaks within this range of excitation light.ConclusionAutofluorescent inclusions appeared in the CD68-positive cells and CD68-negative cells in the subretinal fluid. The macrophages in the subretinal fluid possess autofluorescence which is spectroscopically similar to lipofuscin. Autofluorescence of macrophages can be attributed to degenerated outer segments and debris from apoptotic photoreceptors. Clinicians should consider migration of macrophages, in addition to retinal pigment epithelium, as the possible source when abnormal fundus autofluorescence is observed using an ordinary set of fluorescence filters.</AbstractText>
+            </Abstract>
+            <Affiliation>Department of Ophthalmology, Fukushima Medical University School of Medicine.</Affiliation>
+            <AuthorList>
+                <Author>
+                    <LastName>Sekiryu</LastName>
+                    <ForeName>Tetsuju</ForeName>
+                    <Initials>T</Initials>
+                </Author>
+                <Author>
+                    <LastName>Oguchi</LastName>
+                    <ForeName>Yasuharu</ForeName>
+                    <Initials>Y</Initials>
+                </Author>
+                <Author>
+                    <LastName>Arai</LastName>
+                    <ForeName>Seisuke</ForeName>
+                    <Initials>S</Initials>
+                </Author>
+                <Author>
+                    <LastName>Wada</LastName>
+                    <ForeName>Ikuo</ForeName>
+                    <Initials>I</Initials>
+                </Author>
+                <Author>
+                    <LastName>Iida</LastName>
+                    <ForeName>Tomohiro</ForeName>
+                    <Initials>T</Initials>
+                </Author>
+            </AuthorList>
+            <Language>ENG</Language>
+            <PublicationTypeList>
+                <PublicationType>JOURNAL ARTICLE</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2011</Year>
+                <Month>10</Month>
+                <Day>6</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <MedlineTA>Invest Ophthalmol Vis Sci</MedlineTA>
+            <NlmUniqueID>7703701</NlmUniqueID>
+            <ISSNLinking>0146-0404</ISSNLinking>
+        </MedlineJournalInfo>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2011</Year>
+                <Month>10</Month>
+                <Day>8</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2011</Year>
+                <Month>10</Month>
+                <Day>8</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2011</Year>
+                <Month>10</Month>
+                <Day>8</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>aheadofprint</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pii">iovs.11-8012</ArticleId>
+            <ArticleId IdType="doi">10.1167/iovs.11-8012</ArticleId>
+            <ArticleId IdType="pubmed">21979996</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>

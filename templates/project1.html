@@ -1,48 +1,123 @@
 {% extends "base.html" %}
 
-{% block title %}Project #1{% endblock %}
+{% block title %}Project #1: Full-text Comparator{% endblock %}
+
+{% block more_css %}
+.highlight {background-color: yellow;}
+label, input#id_xml_file, input[type="file"] {
+	display:inline;
+	top:0;
+	margin:0; 
+	line-height:0;
+	}
+input#id_xml_file, input[type="file"]{}
+.note {
+   position:relative;
+   color:#fff;
+   background:#97C02F;
+   overflow:hidden;
+   padding:15px 0;
+
+}
+.note h3, .note h4 {
+	padding: 0 20px;
+	line-height: 120%;
+}
+.note p {
+	padding: 4px 20px;
+}
+.note ul {
+	padding-left: 1em;
+}
+.note:before {
+   content:"";
+   position:absolute;
+   top:0;
+   right:0;
+   border-width:0 16px 16px 0;
+   border-style:solid;
+   border-color:#fff #fff #658E15 #658E15;
+   background:#658E15;
+   -webkit-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+   -moz-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+   box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+   display:block; width:0; /* Firefox 3.0 damage limitation */
+}
+.group:before, .group:after {
+	content:"";
+	display:table;
+}
+.group:after {
+	clear:both;
+}
+.group {
+	zoom:1; /* IE6&7*/
+}
+{% endblock more_css %}
 
 {% block content %}
 <header id="branding">
-	<h1>Project #1</h1>
+	<h1>Project #1: Full-text Comparator</h1>
+	<hr>
 </header>
 <div class="full layout-grid">
-	<header class="column width4">
-		<h1>Full-text Comparator</h1>
-		<hr>
-	</header>
+	<section class="width4" id="upload_form">
+		<!-- Upload form. Note enctype attribute! -->
+		<form action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<label for="id_xml_file" class="required">XML file:</label>
+			<input type="file" name="xml_file" id="id_xml_file" />
+			<input type="submit" value="Upload" />
+		</form>
+
+	<section>
+	<hr />
 	<section class="width4">
 		<h2>Identical words in both documents:</h2>
 		<div class="column width4 grid-example">
-			<p>{{common_word_list_html}}</p>
+			<p>{{ common_word_html|safe }}</p>
 		</div>
 	</section>
 	<section class="width4">
 		<h2>Results of comparison</h2>
-		<div class="column width2 first grid-example note">
-			<h3>{{xml[0].title}}</h3>
-			<p>{{xml[0].authors}}</p>
-			<p>{{xml[0].journal}}, {{xml[0].year}}</p>
-			<h4>Abstract</h4>
-			<p>{{document_list_html()[0]}}</p>
-			<h4>Statistics</h4>
-			<p>
-				{{statistics_list_html()[0]}}
-			</p>
-			<br/>
-		</div>
-		<div class="column width2 grid-example note">
-			<h3>{{xml[1].title}}</h3>
-			<p>{{xml[1].authors}}</p>
-			<p>{{xml[1].journal}}, {{xml[1].year}}</p>
-			<h4>Abstract</h4>
-			<p>{{document_list_html()[1]}}</p>
-			<h4>Statistics</h4>
-			<p>
-				{{statistics_list_html()[1]}}
-			</p>
-			<br/>
+		<div class="group">
+			<div class="column width2 first grid-example note">
+				<h3>{{ title_0 }}</h3>
+				<p>{{ journal_0 }}, {{ year_0 }}</p>
+				<h4>Statistics</h4>
+				{{ statistics_list_0|safe }}
+				<h4>Abstract</h4>
+				<p>{{ document_list_0|safe }}</p>
+			</div>
+			<div class="column width2 grid-example note">
+				<h3>{{ title_1 }}</h3>
+				<p>{{ journal_1 }}, {{ year_1 }}</p>
+				<h4>Statistics</h4>
+				{{ statistics_list_1|safe }}
+				<h4>Abstract</h4>
+				<p>{{ document_list_1|safe }}</p>
+			</div>
+		</div><!-- close group -->
+	</section>
+	<hr />
+	<section class="width4">
+		<h2>Identical words in both documents:</h2>
+		<div class="column width4 grid-example">
+			<p>{{ common_word_html|safe }}</p>
 		</div>
 	</section>
 </div>
 {% endblock content %}
+
+{% block jquery %}
+$("span").hover(
+    function(){
+        var theClass = $(this).attr("class");
+        if (theClass.match(/^word_/)) {
+            $("span."+theClass).addClass("highlight");
+        }
+    },
+    function(){    
+        $("span").removeClass("highlight");
+    });
+{% endblock jquery %}

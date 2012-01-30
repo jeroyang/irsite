@@ -1,0 +1,158 @@
+<PubmedArticle>
+    <MedlineCitation Status="Publisher" Owner="NLM">
+        <PMID Version="1">22282653</PMID>
+        <DateCreated>
+            <Year>2012</Year>
+            <Month>1</Month>
+            <Day>27</Day>
+        </DateCreated>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1538-7445</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <PubDate>
+                        <Year>2012</Year>
+                        <Month>Jan</Month>
+                        <Day>26</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Cancer research</Title>
+            </Journal>
+            <ArticleTitle>Myeloid progenitor cells in the premetastatic lung promote metastases by inducing mesenchymal to epithelial transition.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn/>
+            </Pagination>
+            <Abstract>
+                <AbstractText>Tumors systemically initiate metastatic niches in distant target metastatic organs. These niches, comprised of bone marrow (BM)-derived hematopoietic cells, provide permissive conditions for future metastases. However, the mechanisms by which these cells mediate outgrowth of metastatic tumor cells are not completely known. Using mouse models of spontaneous breast cancer, we show enhanced recruitment of BM-derived CD11b+Gr1+ myeloid progenitor cells in the premetastatic lungs. Gene expression profiling revealed that the myeloid cells from metastatic lungs express versican, an extracellular matrix proteoglycan. Notably, versican in metastatic lungs was mainly contributed by the CD11b+Ly6Chigh monocytic fraction of the myeloid cells and not the tumor cells or other stromal cells. Versican knockdown in the BM significantly impaired lung metastases in vivo, without impacting their recruitment to the lungs or altering the immune microenvironment. Versican stimulated mesenchymal to epithelial transition (MET) of metastatic tumor cells by attenuating phospho-Smad2 levels, which resulted in elevated cell proliferation and accelerated metastases. Analysis of clinical specimens showed elevated versican expression within the metastatic lung of breast cancer patients. Together, our findings suggest that selectively targeting tumor elicited myeloid cells or versican represents a potential therapeutic strategy for combating metastatic disease.</AbstractText>
+            </Abstract>
+            <Affiliation>Mittal Laboratory, Weill Cornell Medical College.</Affiliation>
+            <AuthorList>
+                <Author>
+                    <LastName>Gao</LastName>
+                    <ForeName>Dingcheng</ForeName>
+                    <Initials>D</Initials>
+                </Author>
+                <Author>
+                    <LastName>Joshi</LastName>
+                    <ForeName>Natasha</ForeName>
+                    <Initials>N</Initials>
+                </Author>
+                <Author>
+                    <LastName>Choi</LastName>
+                    <ForeName>Hyejin</ForeName>
+                    <Initials>H</Initials>
+                </Author>
+                <Author>
+                    <LastName>Ryu</LastName>
+                    <ForeName>Seongho</ForeName>
+                    <Initials>S</Initials>
+                </Author>
+                <Author>
+                    <LastName>Hahn</LastName>
+                    <ForeName>Mary</ForeName>
+                    <Initials>M</Initials>
+                </Author>
+                <Author>
+                    <LastName>Catena</LastName>
+                    <ForeName>Raul</ForeName>
+                    <Initials>R</Initials>
+                </Author>
+                <Author>
+                    <LastName>Sadik</LastName>
+                    <ForeName>Helen</ForeName>
+                    <Initials>H</Initials>
+                </Author>
+                <Author>
+                    <LastName>Argani</LastName>
+                    <ForeName>Pedram</ForeName>
+                    <Initials>P</Initials>
+                </Author>
+                <Author>
+                    <LastName>Wagner</LastName>
+                    <ForeName>Patrick L</ForeName>
+                    <Initials>PL</Initials>
+                </Author>
+                <Author>
+                    <LastName>Vahdat</LastName>
+                    <ForeName>Linda T</ForeName>
+                    <Initials>LT</Initials>
+                </Author>
+                <Author>
+                    <LastName>Port</LastName>
+                    <ForeName>Jeffrey L</ForeName>
+                    <Initials>JL</Initials>
+                </Author>
+                <Author>
+                    <LastName>Stiles</LastName>
+                    <ForeName>Brendon</ForeName>
+                    <Initials>B</Initials>
+                </Author>
+                <Author>
+                    <LastName>Sukumar</LastName>
+                    <ForeName>Saraswati</ForeName>
+                    <Initials>S</Initials>
+                </Author>
+                <Author>
+                    <LastName>Altorki</LastName>
+                    <ForeName>Nasser K</ForeName>
+                    <Initials>NK</Initials>
+                </Author>
+                <Author>
+                    <LastName>Rafii</LastName>
+                    <ForeName>Shahin</ForeName>
+                    <Initials>S</Initials>
+                </Author>
+                <Author>
+                    <LastName>Mittal</LastName>
+                    <ForeName>Vivek</ForeName>
+                    <Initials>V</Initials>
+                </Author>
+            </AuthorList>
+            <Language>ENG</Language>
+            <PublicationTypeList>
+                <PublicationType>JOURNAL ARTICLE</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2012</Year>
+                <Month>1</Month>
+                <Day>26</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <MedlineTA>Cancer Res</MedlineTA>
+            <NlmUniqueID>2984705R</NlmUniqueID>
+            <ISSNLinking>0008-5472</ISSNLinking>
+        </MedlineJournalInfo>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2012</Year>
+                <Month>1</Month>
+                <Day>28</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2012</Year>
+                <Month>1</Month>
+                <Day>28</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2012</Year>
+                <Month>1</Month>
+                <Day>28</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>aheadofprint</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pii">0008-5472.CAN-11-2905</ArticleId>
+            <ArticleId IdType="doi">10.1158/0008-5472.CAN-11-2905</ArticleId>
+            <ArticleId IdType="pubmed">22282653</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
