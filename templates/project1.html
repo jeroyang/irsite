@@ -4,13 +4,6 @@
 
 {% block more_css %}
 .highlight {background-color: yellow;}
-label, input#id_xml_file, input[type="file"] {
-	display:inline;
-	top:0;
-	margin:0; 
-	line-height:0;
-	}
-input#id_xml_file, input[type="file"]{}
 .note {
    position:relative;
    color:#fff;
@@ -65,48 +58,59 @@ input#id_xml_file, input[type="file"]{}
 		<!-- Upload form. Note enctype attribute! -->
 		<form action="" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
-			<label for="id_xml_file" class="required">XML file:</label>
-			<input type="file" name="xml_file" id="id_xml_file" />
-			<input type="submit" value="Upload" />
+			<label class="column first width2 required">XML file:  <input type="file" name="xml_file" /></label>
+			<input class="column unitx1" type="submit" value="Upload" />
 		</form>
 
 	<section>
 	<hr />
 	<section class="width4">
-		<h2>Identical words in both documents:</h2>
-		<div class="column width4 grid-example">
-			<p>{{ common_word_html|safe }}</p>
-		</div>
-	</section>
-	<section class="width4">
 		<h2>Results of comparison</h2>
+		<hr class="width4" />
 		<div class="group">
-			<div class="column width2 first grid-example note">
+			<div class="column width2 first grid-example">
 				<h3>{{ title_0 }}</h3>
 				<p>{{ journal_0 }}, {{ year_0 }}</p>
+			</div>
+			<div class="column width2 grid-example">
+				<h3>{{ title_1 }}</h3>
+				<p>{{ journal_1 }}, {{ year_1 }}</p>
+			</div>
+		</div><!-- close group -->
+		<hr class="column width2 first" />
+		<hr class="column width2" />		
+		<div class="group">
+			<div class="column width2 first grid-example">
 				<h4>Statistics</h4>
 				{{ statistics_list_0|safe }}
+			</div>
+			<div class="column width2 grid-example">
+				<h4>Statistics</h4>
+				{{ statistics_list_1|safe }}
+			</div>
+		</div><!-- close group -->
+		<hr class="column width2 first" />
+		<hr class="column width2" />
+		<section class="width4">
+			<h2>Identical words in both documents:</h2>
+			<div class="column width4 grid-example">
+				<p>{{ common_word_html|safe }}</p>
+			</div>
+		</section>
+		<hr class="width4" />
+		<div class="group">
+			<div class="column width2 first grid-example note">
 				<h4>Abstract</h4>
 				<p>{{ document_list_0|safe }}</p>
 			</div>
 			<div class="column width2 grid-example note">
-				<h3>{{ title_1 }}</h3>
-				<p>{{ journal_1 }}, {{ year_1 }}</p>
-				<h4>Statistics</h4>
-				{{ statistics_list_1|safe }}
 				<h4>Abstract</h4>
 				<p>{{ document_list_1|safe }}</p>
 			</div>
-		</div><!-- close group -->
-	</section>
-	<hr />
-	<section class="width4">
-		<h2>Identical words in both documents:</h2>
-		<div class="column width4 grid-example">
-			<p>{{ common_word_html|safe }}</p>
-		</div>
+		</div><!-- close group -->	
 	</section>
 </div>
+<hr class="width4" />
 {% endblock content %}
 
 {% block jquery %}
