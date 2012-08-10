@@ -4,6 +4,7 @@ from lxml import etree
 from django.core.files import File
 import re
 import cgi
+from math import floor
 
 class Xml(models.Model):
     xml_file = models.FileField(upload_to='project1/xml')
@@ -26,11 +27,29 @@ class Comparator(object):
         for doc in self.document_list:
             word_set_list.append(doc.word_set())
         return set.intersection(*word_set_list)
-
+        
+    def common_word_vector(self):
+        return dict([(word, min(list([doc.word_vector()[word] for doc in self.document_list]))) for word in self.common_word_set()])
+        
     def common_word_html(self, prefix='word_'):
         escaped_word_list = map(lambda x:cgi.escape(x), list(self.common_word_set()))
         escaped_word_list.sort()
         result = map(lambda x:'<span class="%s%s">%s</span>' % (cgi.escape(prefix), x, x), escaped_word_list)
+        return " ".join(result)
+    
+    def common_word_cloud(self, weight_levels=5, prefix='word_', weight='weight_'):
+        escaped_word_list = map(lambda x:cgi.escape(x), list(self.common_word_set()))
+        escaped_word_list.sort()
+        word_counts = list([y for x,y in self.common_word_vector().iteritems()])
+        word_counts.sort()
+        word_size = len(word_counts)
+        def word_to_weight(word):
+            count = self.common_word_vector()[word]
+            for i in range(weight_levels, 0, -1):
+                if count >= word_counts[int((i - 1) * floor(word_size / weight_levels))]:
+                    return i
+            
+        result = map(lambda x:'<span class="%s%s font-weight%d">%s</span>' % (cgi.escape(prefix), x, word_to_weight(x), x), escaped_word_list)
         return " ".join(result)
 
     def text_list(self):

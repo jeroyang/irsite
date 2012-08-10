@@ -10,18 +10,26 @@ def index(request):
     # Handle file upload
     if request.method == 'POST':
         form = XmlForm(request.POST, request.FILES)
+        
         if form.is_valid():
-            newdoc = Xml(xml_file=request.FILES['xml_file'])
-            newdoc.save()
-            
-            # Redirect to the index after POST
-            return HttpResponseRedirect(reverse('project1.views.index'))
+            try:
+                newdoc2 = Xml(xml_file=request.FILES['xml_file2'])
+                newdoc2.save()
+            except:
+                pass
+            try:
+                newdoc1 = Xml(xml_file=request.FILES['xml_file1'])
+                newdoc1.save()
+            except:
+                pass
+        # Redirect to the index after POST
+        return HttpResponseRedirect(reverse('project1.views.index'))
     else:        
         xml_list = Xml.objects.all().order_by('-id')[:2]
         xml_document = list([XmlDocument(xml) for xml in xml_list])
         my_comparator = Comparator(*xml_document)
 
-        common_word_html = my_comparator.common_word_html('word_')
+        common_word_cloud = my_comparator.common_word_cloud()
     
         title_0 = xml_document[0].title
         author_0 = ''
@@ -37,5 +45,5 @@ def index(request):
         document_list_1 = my_comparator.document_list_html('word_')[1]
         statistics_list_1 = my_comparator.statistics_list_html()[1]
 
-        return render_to_response('project1.html',locals(),context_instance=RequestContext(request))
+        return render_to_response('project1.html',locals(), context_instance=RequestContext(request))
     

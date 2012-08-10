@@ -4,38 +4,6 @@
 
 {% block more_css %}
 .highlight {background-color: yellow;}
-.note {
-   position:relative;
-   color:#fff;
-   background:#97C02F;
-   overflow:hidden;
-   padding:15px 0;
-
-}
-.note h3, .note h4 {
-	padding: 0 20px;
-	line-height: 120%;
-}
-.note p {
-	padding: 4px 20px;
-}
-.note ul {
-	padding-left: 1em;
-}
-.note:before {
-   content:"";
-   position:absolute;
-   top:0;
-   right:0;
-   border-width:0 16px 16px 0;
-   border-style:solid;
-   border-color:#fff #fff #658E15 #658E15;
-   background:#658E15;
-   -webkit-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
-   -moz-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
-   box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
-   display:block; width:0; /* Firefox 3.0 damage limitation */
-}
 .group:before, .group:after {
 	content:"";
 	display:table;
@@ -46,78 +14,87 @@
 .group {
 	zoom:1; /* IE6&7*/
 }
+th {font-weight:normal;}
+em {font-weight:blod;}
+#common_words {line-height:200%;}
+#common_words span {color:blue}
+.font-weight1 {font-size:100%;}
+.font-weight2 {font-size:130%;}
+.font-weight3 {font-size:160%;}
+.font-weight4 {font-size:200%;}
+.font-weight5 {font-size:250%;}
 {% endblock more_css %}
 
 {% block content %}
 <header id="branding">
 	<h1>Project #1: Full-text Comparator</h1>
-	<hr>
+	<hr />
 </header>
 <div class="full layout-grid">
 	<section class="width4" id="upload_form">
 		<!-- Upload form. Note enctype attribute! -->
-		<form action="" method="post" enctype="multipart/form-data">
+		<form action="/project1/" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
-			<label class="column first width2 required">XML file:  <input type="file" name="xml_file" /></label>
+			<label class="column first width1">XML1:  <input type="file" name="xml_file1" /></label>
+			<label class="column width1">XML2:  <input type="file" name="xml_file2" /></label>
 			<input class="column unitx1" type="submit" value="Upload" />
 		</form>
-
-	<section>
-	<hr />
-	<section class="width4">
-		<h2>Results of comparison</h2>
-		<hr class="width4" />
-		<div class="group">
-			<div class="column width2 first grid-example">
-				<h3>{{ title_0 }}</h3>
-				<p>{{ journal_0 }}, {{ year_0 }}</p>
-			</div>
-			<div class="column width2 grid-example">
-				<h3>{{ title_1 }}</h3>
-				<p>{{ journal_1 }}, {{ year_1 }}</p>
-			</div>
-		</div><!-- close group -->
-		<hr class="column width2 first" />
-		<hr class="column width2" />		
-		<div class="group">
-			<div class="column width2 first grid-example">
-				<h4>Statistics</h4>
-				{{ statistics_list_0|safe }}
-			</div>
-			<div class="column width2 grid-example">
-				<h4>Statistics</h4>
-				{{ statistics_list_1|safe }}
-			</div>
-		</div><!-- close group -->
-		<hr class="column width2 first" />
-		<hr class="column width2" />
-		<section class="width4">
-			<h2>Identical words in both documents:</h2>
-			<div class="column width4 grid-example">
-				<p>{{ common_word_html|safe }}</p>
-			</div>
-		</section>
-		<hr class="width4" />
-		<div class="group">
-			<div class="column width2 first grid-example note">
-				<h4>Abstract</h4>
-				<p>{{ document_list_0|safe }}</p>
-			</div>
-			<div class="column width2 grid-example note">
-				<h4>Abstract</h4>
-				<p>{{ document_list_1|safe }}</p>
-			</div>
-		</div><!-- close group -->	
 	</section>
+	<hr />
+	<section>
+		<h2>Results of comparison</h2>
+		<table class="table-column width4">
+			<thead>
+				<tr>
+					<th class="width2">
+						<em>{{ title_0 }}</em><br />
+						{{ journal_0 }}, {{ year_0 }}
+					</th>
+					<th class="width2">
+						<em>{{ title_1 }}</em><br />
+						{{ journal_1 }}, {{ year_1 }}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>
+						<em>Statistics</em>
+						{{ statistics_list_0|safe }}
+					</th>
+					<th>
+						<em>Statistics</em>
+						{{ statistics_list_1|safe }}
+					</th>
+				</tr>
+				<tr>
+					<th colspan="2" id="common_words">
+						<em>Identical words in both documents:</em><br />
+						{{ common_word_cloud|safe }}
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<em>Abstract</em>
+						<p>{{ document_list_0|safe }}</p>
+					</th>
+					<th>
+						<em>Abstract</em>
+						<p>{{ document_list_1|safe }}</p>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+	</section>					
 </div>
-<hr class="width4" />
 {% endblock content %}
 
 {% block jquery %}
 $("span").hover(
     function(){
         var theClass = $(this).attr("class");
-        if (theClass.match(/^word_/)) {
+		theClass = theClass.split(" ", 1)[0];
+        if (theClass.match(/word_/)) {
             $("span."+theClass).addClass("highlight");
         }
     },
