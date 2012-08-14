@@ -47,11 +47,11 @@ em {font-weight:blod;}
 			<thead>
 				<tr>
 					<th class="width2">
-						<em>{{ title_0 }}</em><br />
+						<h3>{{ title_0 }}</h3><br />
 						{{ journal_0 }}, {{ year_0 }}
 					</th>
 					<th class="width2">
-						<em>{{ title_1 }}</em><br />
+						<h3>{{ title_1 }}</h3><br />
 						{{ journal_1 }}, {{ year_1 }}
 					</th>
 				</tr>
@@ -81,6 +81,12 @@ em {font-weight:blod;}
 					<th>
 						<em>Abstract</em>
 						<p>{{ document_list_1|safe }}</p>
+					</th>
+				</tr>
+				<tr>
+					<th colspan="2" id="common_words">
+						<em>Identical words in both documents:</em><br />
+						{{ common_word_cloud|safe }}
 					</th>
 				</tr>
 			</tbody>

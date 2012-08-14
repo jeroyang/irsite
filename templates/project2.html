@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Project #2: Basic Matching Search{% endblock %}
+
+{% block more_css %}
+.highlight {background-color: yellow;}
+.group:before, .group:after {
+	content:"";
+	display:table;
+}
+.group:after {
+	clear:both;
+}
+.group {
+	zoom:1; /* IE6&7*/
+}
+th {font-weight:normal;}
+em {font-weight:blod;}
+
+{% endblock more_css %}
+
+{% block content %}
+<header id="branding">
+	<h1>Project #2: Basic Matching Search</h1>
+	<hr />
+</header>
+<section class="width4 stroke">
+	<div class="column width1 first">
+		<h3>Search in the collection...</h3>
+        {{ collections }}
+	</div>
+	<div class="column width3">
+	    <div id="searchbar">{{ searchbar }}</div>
+	    <hr/>
+	    <div id="results_count">{{ results_count }}</div>
+
+	    <div id="search_results">{{ search_results }}</div>	        
+	</div>
+	
+</section>
+{% endblock content %}
+
+{% block jquery %}
+$("span").hover(
+    function(){
+        var theClass = $(this).attr("class");
+		theClass = theClass.split(" ", 1)[0];
+        if (theClass.match(/word_/)) {
+            $("span."+theClass).addClass("highlight");
+        }
+    },
+    function(){    
+        $("span").removeClass("highlight");
+    });
+{% endblock jquery %}

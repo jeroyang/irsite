@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^project1/', 'project1.views.index' ),
+    url(r'^project2/', 'project2.views.index' ),
+    url(r'^pubmed_fetcher/', 'pubmed_fetcher.views.index' ),
 	url(r'^/$', 'project1.views.index', name='index'),
 	#(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
 )

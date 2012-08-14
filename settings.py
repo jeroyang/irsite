@@ -118,6 +118,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'project1',
+    'project2',
+    'pubmed_fetcher',
     'django_nose',
 	'lxml',
     # Uncomment the next line to enable the admin:
