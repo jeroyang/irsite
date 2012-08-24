@@ -25,22 +25,29 @@ em {font-weight:blod;}
 	<hr />
 </header>
 <section class="width4 stroke">
-	<div class="column width1 first">
+	<div class="full">
 		<h3>Search in the collection...</h3>
 		<table>
 			<tbody>
-				<tr>
-					<td>Table row 1, data 1</td>
-					<td>Table row 1, data 2</td>
-				</tr>
-				<tr>
-					<td>Table row 2, data 1</td>
-					<td>Table row 2, data 2</td>
-				</tr>
+			    <thead>
+                    <td></td>
+                    <td>{% if selected_collection == '' %}All articles{% else %}<a href="/pubmed/">All articles</a>{% endif %}</td>
+					<td></td>
+					<td></td>
+                </thead>
+			    {% for q in queries %}
+                    <tr>
+                        <td>{{ q.id }}</td>
+                        <td>{% if selected_collection == q.query_term %}{{ q.query_term }}{% else %}<a href="?query={{ q.query_term }}">{{ q.query_term }}</a>{% endif %}
+                        </td>
+                        <td></td>
+    					<td>{{ q.query_date }}</td>
+                    </tr>
+                {% endfor %}
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2">Search bar.....</td>
+					<td colspan="4">Search bar.....</td>
 					
 				</tr>
 			</tfoot>			
