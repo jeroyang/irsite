@@ -28,3 +28,10 @@ pip-log.txt
 
 #Mac file
 .DS_Store
+
+#Resources and Media
+resources
+media
+
+#Database
+irsite.db

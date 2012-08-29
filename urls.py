@@ -19,9 +19,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^project1/', 'project1.views.index' ),
     url(r'^project2/', 'project2.views.index' ),
+    url(r'^build_index/', 'project2.views.build_index' ),
     url(r'^pubmed/', 'pubmed_fetcher.views.index' ),
     url(r'^load/', 'pubmed_fetcher.views.load_articles' ),
-	url(r'^/$', 'project1.views.index', name='index'),
+    url(r'^bigtxt/', 'pubmed_fetcher.views.bigtxt_generator' ),
+    url(r'^train/', 'project2.views.train_spelling_corrector' ),
 	#(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
 )
 

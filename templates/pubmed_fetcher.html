@@ -19,6 +19,7 @@ em {font-weight:blod;}
 
 {% endblock more_css %}
 
+{% load humanize %}
 {% block content %}
 <header id="branding">
 	<h1>Sub-Project: Pubmed Fetcher</h1>
@@ -31,17 +32,17 @@ em {font-weight:blod;}
 			<tbody>
 			    <thead>
                     <td></td>
-                    <td>{% if selected_collection == '' %}All articles{% else %}<a href="/pubmed/">All articles</a>{% endif %}</td>
+                    <td>{% if selected_query == '' %}All articles{% else %}<a href="/pubmed/">All articles</a>{% endif %}</td>
 					<td></td>
 					<td></td>
                 </thead>
 			    {% for q in queries %}
                     <tr>
                         <td>{{ q.id }}</td>
-                        <td>{% if selected_collection == q.query_term %}{{ q.query_term }}{% else %}<a href="?query={{ q.query_term }}">{{ q.query_term }}</a>{% endif %}
+                        <td>{% if selected_query == q.query_term %}{{ q.query_term }}{% else %}<a href="?query={{ q.query_term }}">{{ q.query_term }}</a>{% endif %}
                         </td>
-                        <td></td>
-    					<td>{{ q.query_date }}</td>
+                        <td>{{ q.document_frequency }}</td>
+    					<td>{{ q.query_date|naturalday }}</td>
                     </tr>
                 {% endfor %}
 			</tbody>
