@@ -38,10 +38,7 @@ class Query(models.Model):
 class Article(models.Model):
     pmid = models.CharField(max_length=50, primary_key=True)
     index_version = models.PositiveIntegerField(default=0)
-    full_xml = models.TextField()
     fetch_time = models.DateTimeField(auto_now=True)
-    journal = models.TextField() # <Journal> element
-    author_list = models.TextField() # <AuthorList> element
     title = models.CharField(max_length=200) #Plain text title
     abstract = models.TextField() #Plain text abstract
     def __unicode__(self):
