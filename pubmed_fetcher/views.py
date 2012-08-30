@@ -94,6 +94,19 @@ def index(request):
     queries = Query.objects.all().order_by('-id')[:10]
     return render_to_response('pubmed_fetcher.html',locals(), context_instance=RequestContext(request))
   
+def load_articles(request):
+    """Load all articles from the .gz collection in MEDLINE directory to database"""
+    import os
+    import gzip
+
+    gzfiles = [fn for fn in os.listdir('./resources/medline') if fn[-2:] == 'gz']
+    for fn in gzfiles:
+        with gzip.open('./resources/medline/%s' % fn) as xml:
+            _import_xml(xml)
+        os.rename('./resources/medline/%s' % fn, './resources/medline/%s.loaded' % fn)
+
+    return HttpResponseRedirect(reverse('pubmed_fetcher.views.index'))
+
 
 def _load_cache(cache_path):
     """Load all articles from the .gz collection in cache directory to database"""
