@@ -43,24 +43,18 @@ def _import_xml(xml_file):
     
     article_list = []
     for article in tree.findall('.//MedlineCitation'):
-        article_list.append(Article(pmid=article.findtext("PMID"),
+        article_list.append(Article(pmid=int(article.findtext("PMID")),
                                     index_version=0,
                                     title=article.findtext(".//ArticleTitle"),
-                                    abstract="\n".join([a.text or '' for a in article.findall('.//Abstract/*')]))
-    Article.objects.bulk_create(article_list, batch_size=999)
+                                    abstract="\n".join([a.text or '' for a in article.findall('.//Abstract/*')])))
+        if len(article_list) >= 100:
+            Article.objects.bulk_create(article_list)
+            article_list = []
+    Article.objects.bulk_create(article_list)
     del tree
 
 def _import_pmids(pmid_list):
     """fetch articles from pubmed according the pmid_list"""
-    
-    #First, try to load the corresponding cache file"""
-    for pmid in pmid_list:
-        _load_cache('./resources/cache/%s' % _find_cache_name(pmid))
-    
-    # Check whether the pmid_list are now in the database
-    pmid_list = _unfetched_pmid(pmid_list)
-    
-    # Fetch the missing Articles remotely
     if len(pmid_list) > 0:
         url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
         post_data = [('db', 'pubmed'),
@@ -80,8 +74,8 @@ def _unfetched_pmid(pmid_list):
     return unfetched_pmids
 
 def index(request):
-    if request.GET.has_key('query'): 
-        selected_query = request.GET['query']
+    if request.GET.has_key('c'): 
+        selected_query = request.GET['c']
         pmids = _fetch_pubmed_ids(selected_query)
         _import_pmids(_unfetched_pmid(pmids))
         if len(Query.objects.filter(query_term=selected_query)) == 0:
@@ -106,15 +100,6 @@ def load_articles(request):
         os.rename('./resources/medline/%s' % fn, './resources/medline/%s.loaded' % fn)
 
     return HttpResponseRedirect(reverse('pubmed_fetcher.views.index'))
-
-
-def _load_cache(cache_path):
-    """Load all articles from the .gz collection in cache directory to database"""
-    import gzip
-
-    with gzip.open(cache_path) as xml:
-            _import_xml(xml)
-    
     
 def bigtxt_generator(request):
     """Save a big.txt file in resources directory 
@@ -124,50 +109,10 @@ def bigtxt_generator(request):
     samples = sample(Article.objects.all(), 30000)
     with codecs.open('resources/big.txt', 'w', encoding='utf-8') as bigtxt:
         for s in samples:
-            bigtxt.write("%s\n%s\n" % (s.title, s.abstract_text))
+            bigtxt.write("%s\n%s\n" % (s.title, s.abstract))
     
     return HttpResponseRedirect(reverse('pubmed_fetcher.views.index'))
 
-def _load_to_cache():
-    import os
-    import gzip
-    import re
-    
-    gzfiles = [fn for fn in os.listdir('./resources/medline') if fn[-2:] == 'gz']
-    re_article = re.compile(r'</?MedlineCitation( .+)?>')
-    re_pmid = re.compile(r'<PMID.*?>(?P<pmid>\d+)</PMID>')
-    for fn in gzfiles:
-        with gzip.open('./resources/medline/%s' % fn) as xml:
-            article_xml = ''
-            pmid = ''
-            in_article = False
-            while 1:
-                line = xml.readline()
-                if not line:
-                    break
-                if not in_article and re_article.search(line):
-                    in_article = True
-                    article_xml += line
-                elif re_article.search(line):
-                    article_xml += line
-                    cache_filename = _find_cache_name(pmid)
-                    with gzip.open('./resources/cache/%s' % cache_filename, 'a') as cache_file:
-                        cache_file.write(article_xml)
-                    in_article = False
-                    article_xml = ''
-                    pmid = ''
-                elif in_article:
-                    article_xml += line
-                    pmid_match = re_pmid.search(line)
-                    if pmid_match:
-                        pmid = pmid_match.group('pmid')  
-        os.rename('./resources/medline/%s' % fn, './resources/medline/%s.loaded' % fn)
-
-def _find_cache_name(pmid):
-    filename_length = 4
-    return "%s%s.xml.gz" % ("0" * (filename_length-len(pmid)), pmid[:filename_length])
-        
-        
         
         
         

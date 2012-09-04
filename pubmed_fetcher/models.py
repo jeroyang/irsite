@@ -36,7 +36,7 @@ class Query(models.Model):
             self.save()
 
 class Article(models.Model):
-    pmid = models.CharField(max_length=50, primary_key=True)
+    pmid = models.PositiveIntegerField(primary_key=True)
     index_version = models.PositiveIntegerField(default=0)
     fetch_time = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=200) #Plain text title

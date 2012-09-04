@@ -4,44 +4,56 @@ from tempfile import NamedTemporaryFile
 import cPickle as pickle
 import re
 import collections
-import os 
-from base64 import urlsafe_b64encode as b64
 from django.conf import settings
 from django.core.files import File
 from django.core.files.storage import FileSystemStorage
+from django.template.defaultfilters import slugify
 
 class OverwriteStorage(FileSystemStorage):
-    def get_avaliable_name(self, name): 
+    def get_available_name(self, name): 
         """
         Returns a filename that's tree on the target storage system,
         and available for new content to be write to.
         """
         # If the filename already exists, remove it as if it was a true file system
-        if self.exist(name):
-            os.remove(os.path.join(settings.MEDIA_ROOT, name))
+        if self.exists(name):
+            self.delete(name)
         return name
 
-
 class PostingList(models.Model):
-    token = models.CharField(max_length=200, primary_key=True)
+    token = models.CharField(max_length=100, primary_key=True)
     document_frequency = models.PositiveIntegerField(null=True)
-    postings = models.FileField(upload_to='project2/postings', 
-                            storage=OverwriteStorage(), blank=True)
-    def __unicode__(self):
-        return "%s (%s)" % (token, document_frequency)
+    
+    def _pickle_filename(instance, filename):
+        return 'project2/postings/%s.pickle' %  slugify(instance.token.encode('utf-8'))
         
-    def pickle_postings(self, pmids, refresh=False):
-        """Pcikele the postings into posting FileField"""
-        if refresh == True or not self:
-            pass
-        else: 
-            pmids = pickle.load(self.postings.open(mode='wb')).extend(pmids)
+    posting_pickle = models.FileField(upload_to=_pickle_filename, 
+                            storage=OverwriteStorage(), 
+                            default='project2/emptyset.pickle')
+
+    def __unicode__(self):
+        pmids = list(pickle.load(self.posting_pickle))
+        pmids.sort()
+        if len(pmids) > 13:
+            pl = "%s..." % "->".join([str(x) for x in pmids[:13]])
+        else:
+            pl = "->".join([str(x) for x in pmids])
+        return "%s (%s): %s" % (self.token, self.document_frequency, pl)
+    
+    def pickle_pmids(self, pmids):
+        """Pickle the pmids into posting_pickle filefield"""
         with NamedTemporaryFile() as tmp_file:
+            pmids = self.get_pmids().union(pmids)
             pickle.dump(pmids, tmp_file)
-            pickle_file = File(tmp_file)
-            self.postings.save("%s.pickle" % b64(self.token), pickle_file)
+            self.posting_pickle.save('fn', File(tmp_file))
             self.document_frequency=len(pmids)
             self.save()
+    
+    def get_pmids(self):
+        try:
+            return pickle.load(self.posting_pickle)
+        except:
+            return set()
     
 class SpellingCorrector(object):
     """A class of spelling corrector, the model can be imported from a pickle or trained from a text file."""

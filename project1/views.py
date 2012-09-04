@@ -11,7 +11,6 @@ import cgi
 from lxml import etree
 from math import floor
 
-
 def index(request):
     # Handle file upload
     if request.method == 'POST':
