@@ -34,7 +34,14 @@ em {font-weight:blod;}
 	    <hr/>
 	    <div id="search_overview">{{ search_overview }}</div>
         <hr/>
-	    <div id="search_results">{{ search_results }}</div>	        
+	    <div id="search_results">
+	        
+	        <ol>
+	            {% for r in results %}
+	            <li>{{ r.title }}</li>
+	            {% endfor %}
+	        </ol>
+	    </div>	        
 	</div>
 	
 </section>

@@ -42,7 +42,7 @@ em {font-weight:blod;}
                         <td>{% if selected_query == q.query_term %}{{ q.query_term }}{% else %}<a href="?query={{ q.query_term }}">{{ q.query_term }}</a>{% endif %}
                         </td>
                         <td>{{ q.document_frequency }}</td>
-    					<td>{{ q.query_date|naturalday }}</td>
+    					<td>{{ q.query_date|naturaltime }}</td>
                     </tr>
                 {% endfor %}
 			</tbody>
