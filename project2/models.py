@@ -43,7 +43,7 @@ class PostingList(models.Model):
     def pickle_pmids(self, pmids):
         """Pickle the pmids into posting_pickle filefield"""
         with NamedTemporaryFile() as tmp_file:
-            pmids = self.get_pmids().union(pmids)
+            pmids = set(pmids).union(self.get_pmids())
             pickle.dump(pmids, tmp_file)
             self.posting_pickle.save('fn', File(tmp_file))
             self.document_frequency=len(pmids)
