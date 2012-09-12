@@ -34,6 +34,12 @@ class Query(models.Model):
             pickle_file = File(tmp_file)
             self.postings.save("%s.pickle" % b64(self.query_term), pickle_file)
             self.save()
+    
+    def get_pmids(self):
+        try:
+            return pickle.load(self.postings)
+        except:
+            return set()
 
 class Article(models.Model):
     pmid = models.PositiveIntegerField(primary_key=True)

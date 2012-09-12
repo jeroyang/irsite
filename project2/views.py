@@ -10,28 +10,30 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
-from pubmed_fetcher.models import Article
+from pubmed_fetcher.models import Article, Query
 from project2.models import *
 
 def index(request):
-    queries = 'render_collections(request.GET)'
-    if request.GET.has_key('q'):
+    collections = Query.objects.all().order_by('-id')[:10]
+    query = request.GET.get('q', '')
+    collection = int(request.GET.get('c', 0))
+    if query:
         keywords = request.GET['q'].split(' ')
         result_pmids = set.intersection(*[PostingList.objects.get(token=keyword.lower()).get_pmids() for keyword in keywords])
-        results = [Article.objects.get(pmid=pmid) for pmid in result_pmids]
+        if collection != 0:
+            result_pmids = set.intersection(result_pmids, Query.objects.get(id=collection).get_pmids())
+        results = [(Article.objects.get(pmid=pmid), show_snippet(Article.objects.get(pmid=pmid).abstract, keywords)) for pmid in result_pmids]
         results_count = len(result_pmids)
-
+        search_time = 0.23
+        search_overview = "About %s results (Search time: %s secs)" % (results_count, search_time)
     else:
-        search_results = 'Pseudo_results'
-    
-        results_count = 2000
-    searchbar = 'Search bar'
-    search_time = 0.23
-    
-    search_overview = "About %s results (Search time: %s secs)" % (results_count, search_time)
-    
+        pass
+
     return render_to_response('project2.html',locals(), context_instance=RequestContext(request))
-    
+
+def show_snippet(context, queries):
+    """Return the shortest snippet containing all the query terms"""
+    return "Snippets %s" % context
 
 def train_spelling_corrector(request):
     """Training the word_corrector using big.txt in resources/

@@ -27,7 +27,13 @@ em {font-weight:blod;}
 </header>
 <section class="width4 stroke">
 	<div class="full">
-		<h3>Search in the collection...</h3>
+		<h3>Fetch articles from pubmed...</h3>
+	    <form>
+		    <label class="width3 first"><input type="text" name="c" value="" class="text"></label>
+			<label class="width1"><input type="submit" value="fetch" class="unitx1"></label>
+		</form>
+		<h3>Searching history</h3>
+
 		<table>
 			<tbody>
 			    <thead>
@@ -39,19 +45,13 @@ em {font-weight:blod;}
 			    {% for q in queries %}
                     <tr>
                         <td>{{ q.id }}</td>
-                        <td>{% if selected_query == q.query_term %}{{ q.query_term }}{% else %}<a href="?query={{ q.query_term }}">{{ q.query_term }}</a>{% endif %}
+                        <td>{% if selected_query == q.query_term %}{{ q.query_term }}{% else %}<a href="?c={{ q.query_term }}">{{ q.query_term }}</a>{% endif %}
                         </td>
                         <td>{{ q.document_frequency }}</td>
     					<td>{{ q.query_date|naturaltime }}</td>
                     </tr>
                 {% endfor %}
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="4">Search bar.....</td>
-					
-				</tr>
-			</tfoot>			
+			</tbody>			
 		</table>
 	</div>
 </section>

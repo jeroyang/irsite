@@ -27,18 +27,37 @@ em {font-weight:blod;}
 <section class="width4 stroke">
 	<div class="column width1 first">
 		<h3>Search in the collection...</h3>
-        {{ queries }}
+		<table>
+			<tbody>
+			    <thead>
+                    <td></td>
+                    <td>{% if collection == 0 %}All articles{% else %}<a href="/project2/">All articles</a>{% endif %}</td>
+                </thead>
+			    {% for q in collections %}
+                    <tr>
+                        <td>{{ q.id }}</td>
+                        <td>{% if collection == q.id %}{{ q.query_term }}{% else %}<a href="?c={{ q.id }}">{{ q.query_term }}</a>{% endif %} ({{q.document_frequency}})
+                        </td>
+                    </tr>
+                {% endfor %}
+			</tbody>			
+		</table>
 	</div>
 	<div class="column width3">
-	    <div id="searchbar">{{ searchbar }}</div>
+	    <div id="searchbar">
+	        <form>
+    		    <label class="width2 first"><input type="text" name="q" value="" class="text"></label>
+    			<label class="width1"><input type="submit" value="Search" class="unitx1"></label>
+    		</form>
+	    </div>
 	    <hr/>
 	    <div id="search_overview">{{ search_overview }}</div>
         <hr/>
 	    <div id="search_results">
 	        
 	        <ol>
-	            {% for r in results %}
-	            <li>{{ r.title }}</li>
+	            {% for r, s in results %}
+	            <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ r.pmid }}">{{ r.title }}</a><br />{{ s }}</li>
 	            {% endfor %}
 	        </ol>
 	    </div>	        

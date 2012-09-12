@@ -30,7 +30,7 @@ def _fetch_pubmed_ids(query_term, ret_max=1024):
             ret_start += ret_max
         else:
             break
-    return [str(pmid) for pmid in output]
+    return [int(pmid) for pmid in output]
 
 def _import_xml(xml_file):
     """Import pubmed xml (local or remote file object) to database"""
