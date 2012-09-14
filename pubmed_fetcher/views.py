@@ -58,7 +58,7 @@ def _import_pmids(pmid_list):
     if len(pmid_list) > 0:
         url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
         post_data = [('db', 'pubmed'),
-                     ('id', ','.join(pmid_list)),
+                     ('id', ','.join([str(i) for i in pmid_list])),
                      ('retmode', 'xml')]
         xml = urlopen(url, urlencode(post_data))
         _import_xml(xml)

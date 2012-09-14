@@ -31,12 +31,12 @@ em {font-weight:blod;}
 			<tbody>
 			    <thead>
                     <td></td>
-                    <td>{% if collection == 0 %}All articles{% else %}<a href="/project2/">All articles</a>{% endif %}</td>
+                    <td>{% if collection == 0 %}All articles{% else %}<a href="/project2/{% if query  %}?q={{ query }}{% endif %}">All articles</a>{% endif %}</td>
                 </thead>
-			    {% for q in collections %}
+			    {% for c in collections %}
                     <tr>
-                        <td>{{ q.id }}</td>
-                        <td>{% if collection == q.id %}{{ q.query_term }}{% else %}<a href="?c={{ q.id }}">{{ q.query_term }}</a>{% endif %} ({{q.document_frequency}})
+                        <td>{{ c.id }}</td>
+                        <td>{% if collection == c.id %}{{ c.query_term }}{% else %}<a href="?c={{ c.id }}{% if query  %}&q={{ query }}{% endif %}">{{ c.query_term }}</a>{% endif %} ({{c.document_frequency}})
                         </td>
                     </tr>
                 {% endfor %}
@@ -46,7 +46,8 @@ em {font-weight:blod;}
 	<div class="column width3">
 	    <div id="searchbar">
 	        <form>
-    		    <label class="width2 first"><input type="text" name="q" value="" class="text"></label>
+    		    <input type="hidden" name="c" value="{{ collection }}">
+    		    <label class="width2 first"><input type="text" name="q" value="{{ query }}" class="text"></label>
     			<label class="width1"><input type="submit" value="Search" class="unitx1"></label>
     		</form>
 	    </div>
@@ -54,7 +55,9 @@ em {font-weight:blod;}
 	    <div id="search_overview">{{ search_overview }}</div>
         <hr/>
 	    <div id="search_results">
-	        
+	        {% if sc_message %}
+	        Did you mean <strong>{{ sc_message }}</strong>?<br />
+	        {% endif %}
 	        <ol>
 	            {% for r, s in results %}
 	            <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ r.pmid }}">{{ r.title }}</a><br />{{ s }}</li>
