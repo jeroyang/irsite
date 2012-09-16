@@ -42,8 +42,8 @@ class Query(models.Model):
             return set()
 
 class Article(models.Model):
-    pmid = models.PositiveIntegerField(primary_key=True)
-    index_version = models.PositiveIntegerField(default=0)
+    pmid = models.PositiveIntegerField()
+    indexed = models.BooleanField(default=False)
     fetch_time = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=200) #Plain text title
     abstract = models.TextField() #Plain text abstract

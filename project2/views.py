@@ -26,14 +26,14 @@ def index(request):
         if [k.lower() for k in keywords] != [n.lower() for n in new_keywords]:
             sc_message = " ".join(new_keywords)
         try:
-            result_pmids = set.intersection(*[PostingList.objects.get(token=keyword.lower()).get_pmids() for keyword in new_keywords])
+            result_ids = set.intersection(*[PostingList.objects.get(token=keyword.lower()).get_ids() for keyword in new_keywords])
         except:
-            result_pmids = set()
+            result_ids = set()
         if collection != 0:
-            result_pmids = set.intersection(result_pmids, Query.objects.get(id=collection).get_pmids())
+            result_ids = set.intersection(result_ids, Query.objects.get(id=collection).get_ids())
 
-        results = [(Article.objects.get(pmid=pmid), show_snippet(Article.objects.get(pmid=pmid).abstract, keywords)) for pmid in result_pmids]
-        results_count = len(result_pmids)
+        results = [(Article.objects.get(id=id), show_snippet(Article.objects.get(id=id).abstract, keywords)) for id in result_ids]
+        results_count = len(result_ids)
         search_time = time.clock() - start_time
         search_overview = "About %s results (Search time: %s secs)" % (results_count, search_time)
     else:
@@ -71,30 +71,30 @@ def train_spelling_corrector(request):
 
 def build_index(request):
     """docstring for build_index"""
-    resource.setrlimit(resource.RLIMIT_NOFILE, (2000,-1))
-    largest_index_version = Article.objects.order_by('-index_version')[0].index_version 
-    smallest_index_version = Article.objects.order_by('index_version')[0].index_version
-    if largest_index_version == smallest_index_version:
-        working_index = largest_index_version + 1
-    else:
-        working_index = largest_index_version
-        
-    for article in Article.objects.filter(index_version__lt=working_index):
+    dict_postings = dict()
+    if request.GET.get('rebuild', '') == 'true':
+        for article in Article.objects.filter(indexed=True).order_by('id'):
+            article.indexed = False
+            article.save()
+    
+    for article in Article.objects.filter(indexed=False).order_by('id'):
         fulltext = "%s \n%s" % (article.title, article.abstract)
-        tokens = set([normalize(token) for sentence in sent_tokenize(fulltext) for token in word_tokenize(sentence) if len(token) > 1])
-        dict_postings = dict()
+        tokens = set([normalize(token) for sentence in sent_tokenize(fulltext) for token in word_tokenize(sentence) if len(normalize(token)) > 1])
+
         for token in tokens:
             if token not in dict_postings:
-                dict_postings[token] = [article.pmid]
+                dict_postings[token] = [article.id]
             else:
-                dict_postings[token].append(article.pmid)
-        # Save dic_postings
-        for token in dict_postings:
-            if len(PostingList.objects.filter(token=token))==0:
-                PostingList(token=token).save()
-            PostingList.objects.get(token=token).pickle_pmids(dict_postings[token])  
-        article.index_version = working_index
-        print article.pmid
-        article.save()      
-    
+                dict_postings[token].append(article.id)
+        article.indexed = True
+        article.save()
+  
+    # Wirte postings
+    for token in dict_postings:
+        if len(PostingList.objects.filter(token=token))==0:
+            PostingList(token=token).save()
+        PostingList.objects.get(token=token).pickle_ids(dict_postings[token])
+        print dict_postings[token]
     return HttpResponseRedirect(reverse('pubmed_fetcher.views.index'))
+
+

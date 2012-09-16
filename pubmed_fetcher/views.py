@@ -44,7 +44,6 @@ def _import_xml(xml_file):
     article_list = []
     for article in tree.findall('.//MedlineCitation'):
         article_list.append(Article(pmid=int(article.findtext("PMID")),
-                                    index_version=0,
                                     title=article.findtext(".//ArticleTitle"),
                                     abstract="\n".join([a.text or '' for a in article.findall('.//Abstract/*')])))
         if len(article_list) >= 100:

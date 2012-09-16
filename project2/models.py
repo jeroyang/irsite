@@ -32,24 +32,24 @@ class PostingList(models.Model):
                             default='project2/emptyset.pickle')
 
     def __unicode__(self):
-        pmids = list(pickle.load(self.posting_pickle))
-        pmids.sort()
-        if len(pmids) > 13:
-            pl = "%s..." % "->".join([str(x) for x in pmids[:13]])
+        ids = list(pickle.load(self.posting_pickle))
+        ids.sort()
+        if len(ids) > 13:
+            pl = "%s..." % "->".join([str(x) for x in ids[:13]])
         else:
-            pl = "->".join([str(x) for x in pmids])
+            pl = "->".join([str(x) for x in ids])
         return "%s (%s): %s" % (self.token, self.document_frequency, pl)
     
-    def pickle_pmids(self, pmids):
-        """Pickle the pmids into posting_pickle filefield"""
+    def pickle_ids(self, ids):
+        """Pickle the ids into posting_pickle filefield"""
         with NamedTemporaryFile() as tmp_file:
-            pmids = set(pmids).union(self.get_pmids())
-            pickle.dump(pmids, tmp_file)
+            ids = set(ids).union(self.get_ids())
+            pickle.dump(ids, tmp_file)
             self.posting_pickle.save('fn', File(tmp_file))
-            self.document_frequency=len(pmids)
+            self.document_frequency=len(ids)
             self.save()
     
-    def get_pmids(self):
+    def get_ids(self):
         try:
             return pickle.load(self.posting_pickle)
         except:
