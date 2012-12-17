@@ -26,5 +26,5 @@ After a query was given, the engine separate this query into a list of tokens. A
 
 ##Problems##
 
-1. Results sorting: No yet implemented.
+1. Results sorting: Not yet implemented.
 2. Relative small size of included documents: about 30,000 documents only. 

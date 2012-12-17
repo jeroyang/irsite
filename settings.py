@@ -1,4 +1,4 @@
-# Django settings for irsite project.
+# Django settings for irsite project. 
 from os import getcwd, path
 
 DEBUG = True
