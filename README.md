@@ -5,7 +5,11 @@ Search Engine
 * Author: 資訊工程-P78011167-楊家融-HW5
 * email: jeroyang@gmail.com
 
-##Requirements###
+##Deployment##
+
+I cannot deploy this project on internet, please see my demonstration on youtube: http://youtu.be/11qZSrWJb4A
+
+##Requirements##
 
 1. Python, the programming language.
 2. Django, a robust python-based framework for websites.
@@ -19,3 +23,8 @@ Search Engine
 ##Processing in Query##
 
 After a query was given, the engine separate this query into a list of tokens. According to tokens, the engine allocates the posting lists of each token, and find the intersections of them and return the document_ids. Therefore, find the titles corresponding to the document_ids, and show a shortened snippet of the fulltexts. 
+
+##Problems##
+
+1. Results sorting: No yet implemented.
+2. Relative small size of included documents: about 30,000 documents only. 
