@@ -59,7 +59,7 @@ def normalize(token):
 
 def show_snippet(context, queries):
     """Return the shortest snippet containing all the query terms"""
-    return "Snippets %s" % context
+    return context[0:250]+"..."
 
 def train_spelling_corrector(request):
     """Training the word_corrector using big.txt in resources/

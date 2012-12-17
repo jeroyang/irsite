@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Project #2: Basic Matching Search{% endblock %}
+{% block title %}HW5: Search Engine{% endblock %}
 
 {% block more_css %}
 .highlight {background-color: yellow;}
@@ -21,29 +21,12 @@ em {font-weight:blod;}
 
 {% block content %}
 <header id="branding">
-	<h1>Project #2: Basic Matching Search</h1>
+	<h1>HW5: Search Engine</h1>
+	<p>資訊工程-P78011167-楊家融-HW5</p>
 	<hr />
 </header>
 <section class="width4 stroke">
-	<div class="column width1 first">
-		<h3>Search in the collection...</h3>
-		<table>
-			<tbody>
-			    <thead>
-                    <td></td>
-                    <td>{% if collection == 0 %}All articles{% else %}<a href="/project2/{% if query  %}?q={{ query }}{% endif %}">All articles</a>{% endif %}</td>
-                </thead>
-			    {% for c in collections %}
-                    <tr>
-                        <td>{{ c.id }}</td>
-                        <td>{% if collection == c.id %}{{ c.query_term }}{% else %}<a href="?c={{ c.id }}{% if query  %}&q={{ query }}{% endif %}">{{ c.query_term }}</a>{% endif %} ({{c.document_frequency}})
-                        </td>
-                    </tr>
-                {% endfor %}
-			</tbody>			
-		</table>
-	</div>
-	<div class="column width3">
+	<div class="column width4">
 	    <div id="searchbar">
 	        <form>
     		    <input type="hidden" name="c" value="{{ collection }}">
