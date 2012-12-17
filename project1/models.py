@@ -7,3 +7,4 @@ class Xml(models.Model):
     def __unicode__(self):
         return "id %s" % self.id
 
+#modifications
